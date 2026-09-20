@@ -1,0 +1,143 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-healthy: var(--healthy);
+  --color-atrisk: var(--atrisk);
+  --color-critical: var(--critical);
+  --color-chart-1: var(--teal);
+  --color-chart-2: var(--atrisk);
+  --color-chart-3: var(--critical);
+  --color-chart-4: var(--healthy);
+  --color-chart-5: var(--muted-foreground);
+
+  --font-sans:
+    "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.9rem;
+  --background: oklch(0.968 0.002 240);
+  --foreground: oklch(0.16 0.02 240);
+
+  --card: oklch(1 0 0 / 0.65);
+  --card-foreground: oklch(0.16 0.02 240);
+  --popover: oklch(0.99 0.005 200);
+  --popover-foreground: oklch(0.16 0.02 240);
+
+  --primary: oklch(0.62 0.12 195);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.015 200);
+  --secondary-foreground: oklch(0.2 0.02 240);
+  --muted: oklch(0.955 0.01 210);
+  --muted-foreground: oklch(0.5 0.02 235);
+  --accent: oklch(0.93 0.04 195);
+  --accent-foreground: oklch(0.2 0.03 220);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.02 210 / 0.7);
+  --input: oklch(0.92 0.015 210);
+  --ring: oklch(0.62 0.12 195);
+
+  --teal: oklch(0.62 0.12 195);
+  --teal-soft: oklch(0.86 0.06 195);
+  --healthy: oklch(0.68 0.14 175);
+  --atrisk: oklch(0.78 0.15 80);
+  --critical: oklch(0.6 0.22 27);
+
+  --glass-bg: color-mix(in oklab, white 55%, transparent);
+  --glass-border: color-mix(in oklab, white 60%, transparent);
+  --shadow-glass:
+    0 1px 1px oklch(0 0 0 / 0.04),
+    0 6px 16px -10px oklch(0 0 0 / 0.14);
+  --gradient-bg: oklch(0.968 0.002 240);
+}
+
+.dark {
+  --background: oklch(0.16 0.02 220);
+  --foreground: oklch(0.98 0.005 200);
+  --card: oklch(0.22 0.02 220 / 0.55);
+  --card-foreground: oklch(0.98 0.005 200);
+  --border: oklch(1 0 0 / 0.12);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { min-height: 100%; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--gradient-bg);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  /* Mobile-friendly touch targets for form controls */
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    min-height: 2.75rem;
+  }
+  @media (max-width: 767px) {
+    input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+      font-size: 1rem; /* prevents iOS zoom-on-focus */
+    }
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.022em; font-weight: 600; text-transform: uppercase; }
+  h1 { letter-spacing: -0.03em; font-weight: 700; }
+}
+
+@utility glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-2xl);
+}
+
+@utility glass-subtle {
+  background: color-mix(in oklab, white 40%, transparent);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+
+@utility ring-teal {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--teal) 22%, transparent);
+}
